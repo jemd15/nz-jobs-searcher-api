@@ -38,7 +38,7 @@ getTrademeJobs = async (search, topics, minPage, maxPage) => {
           "classification": $(el).find('a.tm-jobs-search-card__link').attr('href').split('?')[0].split('/')[1],
           "url": url + '/' + $(el).find('a.tm-jobs-search-card__link').attr('href').split('?')[0],
           "site": "www.trademe.co.nz",
-          "id": `${$(el).find('a.tm-jobs-search-card__link').attr('href').split('?')[0].split('/').pop()}`
+          "trademe_id": `${$(el).find('a.tm-jobs-search-card__link').attr('href').split('?')[0].split('/').pop()}`
         })
       }
     })
@@ -86,7 +86,7 @@ getSeekJobs = async (search, topics, minPage, maxPage) => {
           "classification": $(el).find('[data-automation="jobClassification"]').text() || 'not mentioned',
           "url": url + $(el).find('[data-automation="jobTitle"]').attr('href').split('?')[0],
           "site": "www.seek.co.nz",
-          "id": `${$(el).find('[data-automation="jobTitle"]').attr('href').split('?')[0].split('/').pop()}`
+          "id": `seek_${$(el).find('[data-automation="jobTitle"]').attr('href').split('?')[0].split('/').pop()}`
         })
       }
     })
