@@ -38,7 +38,8 @@ getTrademeJobs = async (search, topics, minPage, maxPage) => {
           "classification": $(el).find('a.tm-jobs-search-card__link').attr('href').split('?')[0].split('/')[1],
           "url": url + '/' + $(el).find('a.tm-jobs-search-card__link').attr('href').split('?')[0],
           "site": "www.trademe.co.nz",
-          "trademe_id": `${$(el).find('a.tm-jobs-search-card__link').attr('href').split('?')[0].split('/').pop()}`
+          "id": `trademe_${$(el).find('a.tm-jobs-search-card__link').attr('href').split('?')[0].split('/').pop()}`,
+          "img": $(el).find('img').attr('src') || 'https://shop.raceya.fit/wp-content/uploads/2020/11/logo-placeholder.jpg'
         })
       }
     })
@@ -86,7 +87,8 @@ getSeekJobs = async (search, topics, minPage, maxPage) => {
           "classification": $(el).find('[data-automation="jobClassification"]').text() || 'not mentioned',
           "url": url + $(el).find('[data-automation="jobTitle"]').attr('href').split('?')[0],
           "site": "www.seek.co.nz",
-          "id": `seek_${$(el).find('[data-automation="jobTitle"]').attr('href').split('?')[0].split('/').pop()}`
+          "id": `seek_${$(el).find('[data-automation="jobTitle"]').attr('href').split('?')[0].split('/').pop()}`,
+          "img": $(el).find('img').attr('src') || 'https://shop.raceya.fit/wp-content/uploads/2020/11/logo-placeholder.jpg'
         })
       }
     })
