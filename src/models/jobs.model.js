@@ -1,5 +1,6 @@
 const fetch = require('sync-fetch'); // librería para leer la web
 const cheerio = require('cheerio'); // librería para hacer scrapping
+const dayjs = require('dayjs'); // libreria para manipular fechas
 let jobsModel = {};
 
 
@@ -33,7 +34,7 @@ getTrademeJobs = async (search, topics, minPage, maxPage) => {
           title,
           "company": $(el).find('[tmid="company"]').text().trim(),
           "location": $(el).find('[tmid="location"]').text().trim(),
-          "listingDate": $(el).find('[tmid="startDate"]').text().trim().replace('yesterday', '1 day ago') || 'featured',
+          "listingDate": dateParser($(el).find('[tmid="startDate"]').text().trim().replace('yesterday', '1 day ago')) || 'featured',
           "salary": $(el).find('[tmid="approximatePayRange"]').has('span').text().trim() || 'not mentioned',
           "classification": $(el).find('a.tm-jobs-search-card__link').attr('href').split('?')[0].split('/')[1],
           "url": url + '/' + $(el).find('a.tm-jobs-search-card__link').attr('href').split('?')[0],
@@ -82,7 +83,13 @@ getSeekJobs = async (search, topics, minPage, maxPage) => {
           title,
           "company": $(el).find('[data-automation="jobCompany"]').text(),
           "location": $(el).find('[data-automation="jobLocation"]:first').text() + ', ' + $(el).find('[data-automation="jobLocation"]:last').text(),
-          "listingDate": $(el).find('[data-automation="jobListingDate"]').text() || 'featured',
+          "listingDate": dateParser($(el).find('[data-automation="jobListingDate"]').text()
+            .replace('1d', '1 day')
+            .replace('d', 'days')
+            .replace('1h', '1 hour')
+            .replace('h', ' hours')
+            .replace('m', ' minutes')
+            .replace('1m', '1 minute')) || 'featured',
           "salary": $(el).find('[data-automation="jobSalary"]').has('span').text() || 'not mentioned',
           "classification": $(el).find('[data-automation="jobClassification"]').text() || 'not mentioned',
           "url": url + $(el).find('[data-automation="jobTitle"]').attr('href').split('?')[0],
@@ -129,5 +136,21 @@ aprobeJobOffer = (title, topics) => {
   // console.log("No topics are present in the title.");
   return false; // If no keyword is found in the title
 };
+
+dateParser = (dateText) => {
+  let date = '';
+  
+  if(dateText.includes('day')) {
+    date = dayjs().subtract(parseInt(dateText.split(' ')[0]), 'days');
+  } else if(dateText.includes('hour')) {
+    date = dayjs().subtract(parseInt(dateText.split(' ')[0]), 'hours');
+  } else if(dateText.includes('minute')) {
+    date = dayjs().subtract(parseInt(dateText.split(' ')[0]), 'minutes');
+  } else {
+    date = dateText;
+  }
+
+  return date
+}
 
 module.exports = jobsModel;
