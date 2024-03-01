@@ -1,11 +1,12 @@
-const express = require('express');
-const router = express.Router();
-const jobsModel = require('../models/jobs.model');
+import express from "express";
+import { getJobs } from "../models/jobs.model.js";
 
-router.get('/', /* verifyRole.admin, */ (req, res) => {
+const router = express.Router();
+
+router.get('/', /* verifyRole.admin, */(req, res) => {
   const { search, topics, minPage, maxPage } = req.query;
 
-  jobsModel.getJobs(search, topics.split(','), minPage, maxPage)
+  getJobs(search, topics.split(','), minPage, maxPage)
     .then(jobs => {
       res.status(200).json(jobs);
     })
@@ -17,4 +18,4 @@ router.get('/', /* verifyRole.admin, */ (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

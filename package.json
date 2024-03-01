@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
+  "type": "module",
   "scripts": {
     "start": "node src/main.js",
     "test": "nodemon src/main.js",
@@ -19,6 +20,7 @@
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "morgan": "^1.10.0",
+    "socket.io": "4.7.4",
     "sync-fetch": "^0.5.2"
   }
 }
