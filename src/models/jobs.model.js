@@ -1,5 +1,5 @@
 import fetch from 'sync-fetch'; // librería para leer la web
-import cheerio from 'cheerio'; // librería para hacer scrapping
+import * as cheerio from 'cheerio'; // librería para hacer scrapping
 import dayjs from 'dayjs'; // libreria para manipular fechas
 
 const getTrademeJobsWs = (io, search_id, search, topics, minPage, maxPage) => {
