@@ -1,6 +1,6 @@
 'use strict';
 
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -13,10 +13,10 @@ import { search } from './handlers/search.handler.js';
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
-  cors: {
-    "origin": "*",
-    "methods": "*",
-  }
+	cors: {
+		origin: '*',
+		methods: '*',
+	},
 });
 
 // Settings
@@ -37,17 +37,17 @@ app.use('/api/jobs', router);
 
 // Websockets
 io.on('connection', socket => {
-  console.log('User connected!!!');
+	console.log('User connected!!!');
 
-  search(io, socket);
+	search(io, socket);
 
-  socket.on('disconnect', () => {
-    console.log('User disconnected!!!');
-  })
-})
+	socket.on('disconnect', () => {
+		console.log('User disconnected!!!');
+	});
+});
 
 // Starting the server
 server.listen(app.get('port'), () => {
-  console.clear();
-  console.log('Server on port', app.get('port'));
+	console.clear();
+	console.log('Server on port', app.get('port'));
 });

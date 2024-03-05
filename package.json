@@ -1,26 +1,30 @@
 {
-  "name": "nz-jobs-searcher-api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/main.js",
-  "type": "module",
-  "scripts": {
-    "start": "node src/main.js",
-    "test": "nodemon src/main.js",
-    "publish": "git push && git checkout master && git merge --no-ff develop && git push && git checkout develop"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
-    "cheerio-select": "^2.1.0",
-    "cors": "^2.8.5",
-    "dayjs": "^1.11.10",
-    "dotenv": "^16.4.1",
-    "express": "^4.18.2",
-    "morgan": "^1.10.0",
-    "socket.io": "4.7.4",
-    "sync-fetch": "^0.5.2"
-  }
+	"name": "nz-jobs-searcher-api",
+	"version": "1.0.0",
+	"description": "",
+	"main": "src/main.js",
+	"type": "module",
+	"scripts": {
+		"start": "node src/main.js",
+		"test": "nodemon src/main.js",
+		"publish": "git push && git checkout master && git merge --no-ff develop && git push && git checkout develop"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"cheerio": "^1.0.0-rc.12",
+		"cheerio-select": "^2.1.0",
+		"cors": "^2.8.5",
+		"dayjs": "^1.11.10",
+		"dotenv": "^16.4.1",
+		"express": "^4.18.2",
+		"morgan": "^1.10.0",
+		"socket.io": "4.7.4",
+		"sync-fetch": "^0.5.2"
+	},
+	"devDependencies": {
+		"eslint-config-prettier": "^9.1.0",
+		"prettier": "3.2.5"
+	}
 }
